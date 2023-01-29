@@ -7,8 +7,8 @@ function Page_Not_Found(){
 return(
 
 <div>
-<h1>Please go back to home</h1>
-<button onClick={()=>history.push("/")}>home</button>
+<h1>PLEASE GO BACK TO HOMEPAGE</h1>
+<button className="card-btn" onClick={()=>history.push("/")}>HOME</button>
 </div>
     
 )
