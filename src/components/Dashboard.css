@@ -58,11 +58,12 @@ padding: 10px;
     rgba(52, 177, 255, 0.662) 0px 18px 36px -18px inset; 
 }
 
+/* dash button hover animated  */
 .dash-btn:hover {
   background-position: right center;
   background-size: 200% auto;
-  -webkit-animation: pulse 2s infinite;
-  animation: pulse512 1.5s infinite;
+  -webkit-animation: pulse 1s ;
+  animation: pulse512 1s ;
   cursor: pointer;
 }
 
@@ -71,16 +72,19 @@ padding: 10px;
     box-shadow: 0 0 0 0 #f3f30abb;
   }
 
-  70% {
+  50% {
     box-shadow: 0 0 0 7px rgba(218, 198, 68, 0.557);
   }
 
-  100% {
+  80% {
     box-shadow: 0 0 0 0 rgba(218, 206, 68, 0.58);
   }
 }
-/* media query */
+/* dash button hover animated  */
+
 /* ---------------------------------------------------------------- */
+/* media query */
+
 @media screen and (min-width: 320px) and (max-width: 750px) {
   .dash-icon {
     color: black;

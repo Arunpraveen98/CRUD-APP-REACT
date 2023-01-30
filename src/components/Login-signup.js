@@ -44,6 +44,8 @@ else{
 
     <div className="login-container">
      <p className="login-title">PLEASE LOGIN TO VIEW THE <br/>STUDENT DATABASE</p>
+     <p className="login-sub-title">USERNAME = Enter ( YourName ) and ( @gmail.com )</p>
+     <p className="login-sub-title">PASSWORD = Enter ( YourName ) and ( @123 )</p>
 
         <div className="box">
 
@@ -52,13 +54,13 @@ else{
           <h2><LoginIcon sx={{ fontSize: 40 }} className="login-icon"/>Login</h2>
           <div className="inputBox">
             <input type="text" required="required" onChange={(event)=>setUSERNAME(event.target.value)} value={USERNAME}/>
-            <span>Username : (YourName)@gmail.com</span>
+            <span>Username</span>
             <i></i>
           </div>
 
           <div className="inputBox">
             <input type="password" required="required" onChange={(event)=>setPASSWORD(event.target.value)} value={PASSWORD}/>
-            <span>Password : (YourName)@123</span>
+            <span>Password</span>
             <i></i>
           </div>
          
