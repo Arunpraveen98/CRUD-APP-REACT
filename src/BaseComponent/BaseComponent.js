@@ -91,6 +91,7 @@ function BaseRender({ Title, Sub_Title, children }) {
       localStorage.removeItem("user_name");
       history.push("/");
       setAnchorElUser(null);
+      alert("👍successfully logged out")
     }
   };
 

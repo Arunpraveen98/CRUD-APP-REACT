@@ -1,16 +1,20 @@
 
-import React from "react";
+import React, { useContext } from "react";
 import "./StudentLists.css"
 import { useHistory } from "react-router-dom";
 import BorderColorSharpIcon from '@mui/icons-material/BorderColorSharp';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-
+import { context_Api } from "../../App";
 
 
 /* -----------------------------------------------------------------------        */
 
-export function Studentdetails({Student_data,setStudent_data}) {
+export function Studentdetails() {
 
+  //? useContext...
+  const {Student_data,setStudent_data}= useContext(context_Api);
+  
+  //? Router useHistory...
   const history=useHistory();
   
  /* -----------------------------------------------------------------------        */

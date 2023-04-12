@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import { context_Api } from "../../App";
 
-function SelectedStudentProfile({ Student_data }) {
- 
+function SelectedStudentProfile() {
+
+  //? useContext...
+  const {Student_data}= useContext(context_Api);
+
+  //?Router useHistory...
   const history=useHistory();
-
+  
+  //? useParams...
   const { index } = useParams();
   const SelectedIndex = Student_data[index];
 
@@ -12,7 +18,7 @@ function SelectedStudentProfile({ Student_data }) {
 
     <div className="selected-profile">
 
-      <h1 className="profile">DETAILS OF SELECTED PROFILE</h1>
+      <h1 className="profile">DETAILS OF STUDENT PROFILE</h1>
 
       <div className="selected-cards" key={SelectedIndex.index}>
       

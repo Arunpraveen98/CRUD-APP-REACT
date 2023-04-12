@@ -1,20 +1,23 @@
+import React, { useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { AccountCircle, EmailOutlined } from "@mui/icons-material";
-import NumbersIcon from '@mui/icons-material/Numbers';
-import BatchPredictionIcon from '@mui/icons-material/BatchPrediction';
-import AutoStoriesIcon from '@mui/icons-material/AutoStories';
-import CabinIcon from '@mui/icons-material/Cabin';
-import WcIcon from '@mui/icons-material/Wc';
-import { Box, Button, InputAdornment, TextField } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
 
-const EditStudentData = ({ Student_data, setStudent_data }) => {
-  //? history is keyword in that it will hold the current path address...
+import { Button, InputAdornment, TextField } from "@mui/material";
+import { Box } from "@mui/system";
+import NumbersIcon from "@mui/icons-material/Numbers";
+import BatchPredictionIcon from "@mui/icons-material/BatchPrediction";
+import AutoStoriesIcon from "@mui/icons-material/AutoStories";
+import CabinIcon from "@mui/icons-material/Cabin";
+import WcIcon from "@mui/icons-material/Wc";
+import { context_Api } from "../../App";
+
+function AddStudentData() {
+
+  //? useContext...
+  const { Student_data, setStudent_data } = useContext(context_Api);
+  
+  //? Router useHistory...
   const history = useHistory();
-  //? In <Route path=("/:CardIndex") After colon(:)=>It will take the parameter value...
-  //? useParams();=> It is used to tell that  we have to use this parameter value...
-  //? same parameter name will be used in useParams();
-  const { CardIndex } = useParams();
 
   const [id, setid] = useState("");
   const [firstname, setFirstName] = useState("");
@@ -25,59 +28,26 @@ const EditStudentData = ({ Student_data, setStudent_data }) => {
   const [course, setCourse] = useState("");
   const [hometown, setHomeTown] = useState("");
 
-  /* -----------------------------------------------------------------------        */
-  //? editing student data...
-
-  //? After functional component initialization
-  //? this mounting useEffect will be applied First...
-  //? After checking this useEffect then only other functions and jsx will be executed...
-  //? Here useEffect is used => after edit button is clicked
-  //? we have to set the input box (empty value => default value)...
-  //? For that reason useEffect is used and it will be executed first....
-  // state hooks...
-  const Edit_Card_Data = Student_data[CardIndex];
-
-  useEffect(() => {
-    setid(Edit_Card_Data.id);
-    setFirstName(Edit_Card_Data.firstname);
-    setLastName(Edit_Card_Data.lastname);
-    setEmail(Edit_Card_Data.email);
-    setBatch(Edit_Card_Data.batch);
-    setGender(Edit_Card_Data.gender);
-    setCourse(Edit_Card_Data.course);
-    setHomeTown(Edit_Card_Data.hometown);
-  }, []);
-
-  //? []=> in this square bracket we have to give dependencies like
-  //? (index,name,id etc..) whenever this dependency changed useEffect will applied...
-
   // -----------------------------------------------------------------------
 
-  //? updating student data...
+  //? Adding new student data...
 
-  function updateStudentData() {
-    //? whenever the input is changed onChange is called and we are updating the input value...
-    //?That input value will be updated in (key:value) pairs in the below object...
-    //? If (key name and value) are same means we can use (shorthand property) like key name only...
-
-    const update_object = {
-      id: id,
-      firstname: firstname,
-      lastname: lastname,
-      email: email,
-      batch: batch,
-      gender: gender,
-      course: course,
-      hometown: hometown,
+  function addNewData() {
+    //? whenever the input field changes the value will be update by using onChange event...
+    //? After that we have to create a new object and update the values in (key:value) pairs...
+    const newStudentData = {
+      id,
+      firstname,
+      lastname,
+      batch,
+      email,
+      gender,
+      course,
+      hometown,
     };
-    //? After updated object is created => we have to update this object
-    //? to the student_data respective card index...
-    Student_data[CardIndex] = update_object;
+    //? After that we have to spread the Student_data and add the new object...
+    setStudent_data([...Student_data, newStudentData]);
 
-    //? After that we have to use spread operator to update the the updated values...
-    //? Bcoz if we spread and setStudent_data it will map again and upadated to card...
-    setStudent_data([...Student_data]);
-    //? After update we have to empty the input field...
     setid("");
     setFirstName("");
     setLastName("");
@@ -90,21 +60,16 @@ const EditStudentData = ({ Student_data, setStudent_data }) => {
     history.push("/StudentDetails");
   }
 
-  // -----------------------------------------------------------------------
-
   return (
     <div className="student-container">
-
       <div className="student-input-area">
-
-      <Box
+        <Box
           component="form"
-          sx={{ "& .MuiTextField-root": { m: 1, width: "25ch" },}}
+          sx={{ "& .MuiTextField-root": { m: 1, width: "25ch" } }}
           noValidate
           autoComplete="off"
         >
-       
-       {/* -----------------------------------------------------------------------        */}
+          {/* -----------------------------------------------------------------------        */}
           <div className="text-area">
             {/* First Name */}
             <TextField
@@ -118,9 +83,9 @@ const EditStudentData = ({ Student_data, setStudent_data }) => {
                   <InputAdornment position="start">
                     <AccountCircle className="account-circle" />
                   </InputAdornment>
-                  ),
+                ),
               }}
-              //whenever the input field changes this onChange event function is called and 
+              //whenever the input field changes this onChange event function is called and
               //(input) is parameter =>if we console means it will return onChange event's property=>(value will be object)
               //In that onChange property => target is one of the property (the value is input field)
               //In that target property  => value is one of the property (the value is input field value)
@@ -137,7 +102,7 @@ const EditStudentData = ({ Student_data, setStudent_data }) => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <AccountCircle className="account-circle"/>
+                    <AccountCircle className="account-circle" />
                   </InputAdornment>
                 ),
               }}
@@ -152,7 +117,7 @@ const EditStudentData = ({ Student_data, setStudent_data }) => {
           {/* -----------------------------------------------------------------------        */}
           <div className="text-area">
             {/* ID */}
-           
+
             <TextField
               required
               fullWidth
@@ -161,7 +126,7 @@ const EditStudentData = ({ Student_data, setStudent_data }) => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <NumbersIcon className="account-circle"/>
+                    <NumbersIcon className="account-circle" />
                   </InputAdornment>
                 ),
               }}
@@ -169,8 +134,8 @@ const EditStudentData = ({ Student_data, setStudent_data }) => {
               value={id}
               variant="filled"
               type="number"
-              />
-             {/* Email */}
+            />
+            {/* Email */}
             <TextField
               required
               fullWidth
@@ -179,7 +144,7 @@ const EditStudentData = ({ Student_data, setStudent_data }) => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <EmailOutlined className="account-circle"/>
+                    <EmailOutlined className="account-circle" />
                   </InputAdornment>
                 ),
               }}
@@ -200,7 +165,7 @@ const EditStudentData = ({ Student_data, setStudent_data }) => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <BatchPredictionIcon className="account-circle"/>
+                    <BatchPredictionIcon className="account-circle" />
                   </InputAdornment>
                 ),
               }}
@@ -218,7 +183,7 @@ const EditStudentData = ({ Student_data, setStudent_data }) => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <WcIcon className="account-circle"/>
+                    <WcIcon className="account-circle" />
                   </InputAdornment>
                 ),
               }}
@@ -239,7 +204,7 @@ const EditStudentData = ({ Student_data, setStudent_data }) => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <AutoStoriesIcon className="account-circle"/>
+                    <AutoStoriesIcon className="account-circle" />
                   </InputAdornment>
                 ),
               }}
@@ -256,7 +221,7 @@ const EditStudentData = ({ Student_data, setStudent_data }) => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <CabinIcon className="account-circle"/>
+                    <CabinIcon className="account-circle" />
                   </InputAdornment>
                 ),
               }}
@@ -270,19 +235,18 @@ const EditStudentData = ({ Student_data, setStudent_data }) => {
 
           {/* -----------------------------------------------------------------------        */}
         </Box>
-         {/* Update data Button */}
+
         <Button
           variant="contained"
           size="large"
-          onClick={() => updateStudentData()}
+          className="add-btn"
+          onClick={() => addNewData()}
         >
-          UPDATE DATA
+          ADD DATA
         </Button>
-
       </div>
-
     </div>
   );
-};
+}
 
-export default EditStudentData;
+export default AddStudentData;
